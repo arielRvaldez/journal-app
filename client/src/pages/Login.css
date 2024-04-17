@@ -1,0 +1,35 @@
+.container {
+    max-width: 100%;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .entry-form {
+    margin-bottom: 20px;
+  }
+  
+  input[type="text"],
+  textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #1a1a1a;
+    color: rgba(255, 255, 255, 0.87);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.25s;
+  }
+  button:hover {
+    background-color: #535bf2;
+  }
+  @media (min-width: 768px) {
+    .container {
+      max-width: 768px;
+      margin: 0 auto;
+    }
+  }
+  

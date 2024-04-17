@@ -11,7 +11,10 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "jwt-decode": "4.0.0",
+    "graphql": "16.8.1",
+    "@apollo/client": "3.9.11"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
