@@ -28,7 +28,7 @@ const server = new ApolloServer({
 
 // Apply ApolloServer middleware to Express app
 server.applyMiddleware({ app });
-
+9
 // Define port number
 const PORT = process.env.PORT || 5000;
 
