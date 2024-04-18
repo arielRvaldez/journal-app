@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 // Define the schema for a journal entry
-const journalEntrySchema = new mongoose.Schema({
+const journalEntrySchema = new Schema({
   title: {
     type: String,
     required: true
@@ -16,12 +16,12 @@ const journalEntrySchema = new mongoose.Schema({
   },
   // Optionally, you can include a reference to a user who created the entry
   user: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'User'
   }
 });
 
 // Create a model using the schema
-const JournalEntry = mongoose.model('JournalEntry', journalEntrySchema);
+const JournalEntry = model('JournalEntry', journalEntrySchema);
 
 module.exports = JournalEntry;
