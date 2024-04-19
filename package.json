@@ -28,15 +28,13 @@
   "homepage": "https://github.com/arielRvaldez/journal-app#readme",
   "dependencies": {
     "apollo": "^2.34.0",
+    "concurrently": "^8.2.2",
     "express": "^4.19.2",
     "graphql": "^16.8.1",
     "mongoose": "^8.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.3",
-    "styled-components": "^6.1.8",
-    "concurrently": "8.2.2"
-    "styled-components": "^6.1.8",
-    "concurrently": "^8.2.2"
+    "styled-components": "^6.1.8"
   }
 }
