@@ -15,7 +15,6 @@
     "jwt-decode": "4.0.0",
     "graphql": "16.8.1",
     "@apollo/client": "3.9.11"
-
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
