@@ -1,136 +1,159 @@
-const { Query } = require('mongoose');
-const { Goal, User, JournalEntry} = require('../models');
-const { signToken, AuthenticationError } = require('../utils/auth');
-
+const { User, JournalEntry, Goal } = require('../models');
+const bcrypt = require('bcrypt');
+const { signToken, verifyToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().populate('goals') .populate('journalEntries');
-    },
-    user: async (parent, { username }) => {
-      return User.findOne({ username }).populate('journalEntries').populate('goals');
-    },
-    journalEntries: async (parent, { username }) => {
-      const params = username ? { username } : {};
-      return JournalEntry.find(params).sort({ createdAt: -1 });
-    },
-    journalEntry: async (parent, { journalId }) => {
-      return JournalEntry.findOne({ _id: journalId });
-    },
-    goals: async (parent, { username }) => {
-        const params = username ? { username } : {};
-        return Goal.find(params).sort({ createdAt: -1 });
-        },
-    goal: async (parent, { goalId }) => {
-        return Goal.findOne({ _id: goalId });
-    },
-    me: async (parent, args, context) => {
-      if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('journalEntries').populate('goals');
+      try {
+        return await User.find();
+      } catch (error) {
+        throw new Error(error.message);
       }
-      throw AuthenticationError;
+    },
+    user: async (_, { username }) => {
+      try {
+        return await User.findOne({ username }).populate('journalEntries').populate('goals');
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    },
+    journalEntries: async (_, { username }) => {
+      try {
+        const user = await User.findOne({ username });
+        if (!user) throw new Error('User not found');
+        return await JournalEntry.find({ journalAuthor: username });
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    },
+    journalEntry: async (_, { journalId }) => {
+      try {
+        return await JournalEntry.findById(journalId);
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    },
+    goals: async (_, { username }) => {
+      try {
+        const user = await User.findOne({ username });
+        if (!user) throw new Error('User not found');
+        return await Goal.find({ goalAuthor: username });
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    },
+    goal: async (_, { goalId }) => {
+      try {
+        return await Goal.findById(goalId);
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    },
+    me: async (_, __, { user }) => {
+      if (!user) throw new Error('Not authenticated');
+      return user;
     },
   },
-
   Mutation: {
-    addUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
-      const token = signToken(user);
-      return { token, user };
-    },
-    login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
+    addUser: async (_, { username, email, password }) => {
+      try {
+        const existingUser = await User.findOne({ email });
+        if (existingUser) throw new Error('User already exists');
 
-      if (!user) {
-        throw AuthenticationError;
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const newUser = new User({ username, email, password: hashedPassword });
+        await newUser.save();
+
+        const token = signToken(newUser);
+        return { token, user: newUser };
+      } catch (error) {
+        throw new Error(error.message);
       }
-
-      const correctPw = await user.isCorrectPassword(password);
-
-      if (!correctPw) {
-        throw AuthenticationError;
-      }
-
-      const token = signToken(user);
-
-      return { token, user };
     },
-    addJournalEntry: async (parent, { journalText }, context) => {
-      if (context.user) {
-        const journalEntry = await journalEntry.create({
+    login: async (_, { email, password }) => {
+      try {
+        const user = await User.findOne({ email });
+        if (!user) throw new Error('Invalid email or password');
+
+        const passwordMatch = await bcrypt.compare(password, user.password);
+        if (!passwordMatch) throw new Error('Invalid email or password');
+
+        const token = signToken(user);
+        return { token, user };
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    },
+    addJournalEntry: async (_, { journalText }, { user }) => {
+      try {
+        if (!user) throw new Error('Not authenticated');
+        const newJournalEntry = new JournalEntry({
           journalText,
-          journalAuthor: context.user.username,
+          journalAuthor: user.username,
+          createdAt: new Date().toISOString()
         });
+        await newJournalEntry.save();
+        return newJournalEntry;
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    },
+    updateJournalEntry: async (_, { journalId, journalText }, { user }) => {
+      try {
+        if (!user) throw new Error('Not authenticated');
+        const journalEntry = await JournalEntry.findById(journalId);
+        if (!journalEntry) throw new Error('Journal entry not found');
+        if (journalEntry.journalAuthor !== user.username) throw new Error('Unauthorized');
 
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: { journalEntries: journal._id } }
-        );
-
+        journalEntry.journalText = journalText;
+        await journalEntry.save();
         return journalEntry;
+      } catch (error) {
+        throw new Error(error.message);
       }
-      throw AuthenticationError;
-      ('You need to be logged in!');
     },
-    updateJournalEntry: async (parent, { journalId, journalText }, context) => {
-      return await JournalEntry.findOneAndUpdate(
-        { _id: journalId },
-        { journalText },
-        { new: true }
-      );
-    },
-    addGoal: async (parent, { goalText }, context) => {
-        if (context.user) {
-          const goal = await Goal.create({
-            goalText,
-            goalAuthor: context.user.username,
-          });
-  
-          await User.findOneAndUpdate(
-            { _id: context.user._id },
-            { $addToSet: { goals: goal._id } }
-          );
-  
-          return goal;
-        }
-        throw AuthenticationError;
-        ('You need to be logged in!');
-      },
-    },
-    removeJournalEntry: async (parent, { journalId }, context) => {
-      if (context.user) {
-        const journalEntry = await journalEntry.findOneAndDelete({
-          _id: journalId,
-          journalAuthor: context.user.username,
+    addGoal: async (_, { goalText }, { user }) => {
+      try {
+        if (!user) throw new Error('Not authenticated');
+        const newGoal = new Goal({
+          goalText,
+          goalAuthor: user.username,
+          createdAt: new Date().toISOString()
         });
-
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { journalEntries: journalEntry._id } }
-        );
-
-        return thought;
+        await newGoal.save();
+        return newGoal;
+      } catch (error) {
+        throw new Error(error.message);
       }
-      throw AuthenticationError;
     },
-    removeGoal: async (parent, { goalId }, context) => {
-        if (context.user) {
-          const goal = await Goal.findOneAndDelete({
-            _id: goalId,
-            goalAuthor: context.user.username,
-          });
-          
-        await User.findOneAndUpdate(
-            { _id: context.user._id },
-            { $pull: { goals: goal._id } }
-        );
-  
-        return goal;
-        }
-        throw AuthenticationError;
-    },
-    };
+    removeJournalEntry: async (_, { journalId }, { user }) => {
+      try {
+        if (!user) throw new Error('Not authenticated');
+        const journalEntry = await JournalEntry.findById(journalId);
+        if (!journalEntry) throw new Error('Journal entry not found');
+        if (journalEntry.journalAuthor !== user.username) throw new Error('Unauthorized');
 
+        await JournalEntry.findByIdAndDelete(journalId);
+        return journalEntry;
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    },
+    removeGoal: async (_, { goalId }, { user }) => {
+      try {
+        if (!user) throw new Error('Not authenticated');
+        const goal = await Goal.findById(goalId);
+        if (!goal) throw new Error('Goal not found');
+        if (goal.goalAuthor !== user.username) throw new Error('Unauthorized');
+
+        await Goal.findByIdAndDelete(goalId);
+        return goal;
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    },
+  },
+};
 
 module.exports = resolvers;

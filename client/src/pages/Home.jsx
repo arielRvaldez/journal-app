@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import Auth from '../utils/auth'; // Import your authentication utility
 
 function Home() {
   const [entries, setEntries] = useState([]);
@@ -6,8 +8,23 @@ function Home() {
   const [newEntryTitle, setNewEntryTitle] = useState('');
   const [newEntryContent, setNewEntryContent] = useState('');
   const [newGoal, setNewGoal] = useState('');
+  const history = useHistory();
+
+  // Effect to check authentication status on component mount
+  useEffect(() => {
+    if (!Auth.isAuthenticated()) {
+      // Redirect to login page if not authenticated
+      history.push('/login');
+    }
+  }, [history]);
 
   const addEntry = () => {
+    // Check authentication before allowing user to add entry
+    if (!Auth.isAuthenticated()) {
+      history.push('/login');
+      return;
+    }
+
     if (newEntryTitle.trim() === '' || newEntryContent.trim() === '') {
       alert('Please fill out both title and content fields.');
       return;
@@ -26,6 +43,12 @@ function Home() {
   };
 
   const addGoal = () => {
+    // Check authentication before allowing user to add goal
+    if (!Auth.isAuthenticated()) {
+      history.push('/login');
+      return;
+    }
+
     if (newGoal.trim() === '') {
       alert('Please enter a goal.');
       return;
@@ -41,6 +64,12 @@ function Home() {
   };
 
   const deleteItem = (id) => {
+    // Check authentication before allowing user to delete item
+    if (!Auth.isAuthenticated()) {
+      history.push('/login');
+      return;
+    }
+
     setEntries(entries.filter(entry => entry.id !== id));
     setGoals(goals.filter(goal => goal.id !== id));
   };

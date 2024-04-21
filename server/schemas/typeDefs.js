@@ -1,25 +1,26 @@
-const typeDefs = `
+const { gql } = require('apollo-server-express');
+
+const typeDefs = gql`
   type User {
-    _id: ID
-    username: String
-    email: String
-    password: String
-    journalEntries: [JournalEntry]!
-    goals: [Goal]!
+    _id: ID!
+    username: String!
+    email: String!
+    journalEntries: [JournalEntry!]!
+    goals: [Goal!]!
   }
 
   type JournalEntry {
-    _id: ID
-    journalText: String
-    journalAuthor: String
-    createdAt: String
+    _id: ID!
+    journalText: String!
+    journalAuthor: String!
+    createdAt: String!
   }
 
   type Goal {
-    _id: ID
-    goalText: String
-    goalAuthor: String
-    createdAt: String
+    _id: ID!
+    goalText: String!
+    goalAuthor: String!
+    createdAt: String!
   }
 
   type Auth {
@@ -27,13 +28,16 @@ const typeDefs = `
     user: User
   }
 
+  input UpdateJournalEntryInput {
+    journalText: String!
+  }
+
   type Query {
-    users: [User]
+    users: [User!]!
     user(username: String!): User
-    journalEntries(username: String): [JournalEntry]
+    journalEntries(username: String): [JournalEntry!]!
     journalEntry(journalId: ID!): JournalEntry
-    updateJournalEntry(journalId: ID!, journalText: String!): JournalEntry
-    goals(username: String): [Goal]
+    goals(username: String): [Goal!]!
     goal(goalId: ID!): Goal
     me: User
   }
@@ -41,12 +45,12 @@ const typeDefs = `
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addJournalEntry(thoughtText: String!): JournalEntry
-    addGoal(goalText: String!): Goal
-    updateGoal(goalId: ID!, goalText: String!): Goal
+    addJournalEntry(journalText: String!): JournalEntry
+    updateJournalEntry(journalId: ID!, journalText: String!): JournalEntry
+    addGoal(goalText: String!, userId: ID!): Goal
     removeJournalEntry(journalId: ID!): JournalEntry
     removeGoal(goalId: ID!): Goal
-  }
+  }  
 `;
 
 module.exports = typeDefs;
