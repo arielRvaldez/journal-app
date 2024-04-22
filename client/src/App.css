@@ -7,6 +7,25 @@
   align-items: center; /* Center items horizontally */
 }
 
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 250px; /* Adjust width as needed */
+  background: #2C3E50; /* Dark background for the sidebar */
+  color: rgb(175, 14, 14);
+  flex-shrink: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.content {
+  flex-grow: 1; /* Take up remaining space */
+  padding: 20px;
+}
+
 .entry-form {
   margin-bottom: 20px;
   width: 100%; /* Ensure the form takes full width */

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './JournalEntryForm.css';// Tell Webpack that JournalEntryForm.js uses these styles
 
 function JournalEntryForm() {
   const [title, setTitle] = useState('');
@@ -31,8 +32,8 @@ function JournalEntryForm() {
   };
 
   return (
-    <div>
-      <h2>Journal Entry</h2>
+    <div className="form-container">
+      <h2 className="form-title">Journal Entry</h2>
       <form onSubmit={handleSubmit}>
         <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
         <textarea placeholder="Content" value={content} onChange={(e) => setContent(e.target.value)}></textarea>

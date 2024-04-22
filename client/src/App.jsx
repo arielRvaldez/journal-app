@@ -4,6 +4,9 @@ import Login from './components/Login';
 import Signup from './components/SignUp';
 import JournalEntry from './pages/JournalEntry';
 import Home from './pages/Home';
+//import Navbar from './components/Navbar';
+//import Sidebar from './components/Sidebar';
+// import Layout from './components/Layout';
 
 function App() {
   return (

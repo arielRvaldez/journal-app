@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom'; // Import useHistory from React Router
+import './SignUp.css';
 
 function SignUp() {
   const history = useHistory(); // Initialize useHistory hook
@@ -37,7 +38,7 @@ function SignUp() {
   };
 
   return (
-    <div>
+    <div className="form-container">
       <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
         <input type="text" name="username" placeholder="Username" value={formData.username} onChange={handleChange} />

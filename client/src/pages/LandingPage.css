@@ -1,0 +1,200 @@
+/* Base styles to reset browser defaults */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Use a Google Font for this landing page */
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+  
+  body, html {
+    height: 100%;
+    font-family: 'Nunito', sans-serif;
+  }
+  
+  /* Full-page background image */
+  .bg-image {
+    background-image: url('client/src/assets/app.png'); /* Link to your unique background image */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+  }
+  
+  /* Overlay to ensure text is readable on any background */
+  .bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6); /* Dark overlay for better text visibility */
+  }
+  
+  .landing-page {
+    position: relative;
+    z-index: 2;
+    max-width: 600px; /* Restricts max width of content for readability */
+    margin: auto; /* Centers the div on the page */
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.8); /* Slightly transparent white background */
+    border-radius: 10px; /* Rounds the corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+  }
+
+  h1 {
+    font-size: 4rem; /* Makes the font larger */
+    color: #333; /* Dark gray color */
+    margin-bottom: 1rem; /* Adds space below the heading */
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow to make the text pop */
+  }
+  
+  /* Styling the paragraph tags */
+  p {
+    font-size: 1.25rem; /* Increase font size for better readability */
+    color: #555; /* Lighter shade for the text */
+    line-height: 1.5; /* Adds more space between lines */
+    margin-bottom: 1.5rem; /* Adds more space below each paragraph */
+  }
+  
+  /* Style the navigation links */
+  a {
+    padding: 0.5rem 1rem; /* Padding to make the link look like a button */
+    border: 2px solid #54aaf0; /* Border to look like button outline */
+    border-radius: 25px; /* Rounded corners for the links/button */
+    color: #2c53a7; /* Button text color */
+    font-weight: bold; /* Bold font for text */
+    text-decoration: none; /* Removes underline from links */
+    transition: all 0.3s ease; /* Smooth transition for color change on hover */
+  }
+  .navbar {
+    background: #8ec176;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .navbar a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+  }
+  
+  .navbar a:hover {
+    background: #555;
+  }
+  
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 200px;
+    height: 100%;
+    background: #f4f4f4;
+    padding: 1rem;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    flex: 0 0 200px;
+  }
+  
+  .sidebar a {
+    display: block;
+    margin-bottom: 1rem;
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .sidebar a:hover {
+    color: #a5a58d;
+    text-decoration: underline;
+    display: block;
+    margin: 1rem 0;
+    color: #6b705c;
+    font-size: 1.2rem;
+    text-decoration: none;
+  }
+  
+  .company-info {
+    padding: 2rem;
+    background: #eee;
+    margin-top: 1rem;
+  }
+  
+  .company-info h2 {
+    margin-bottom: 1rem;
+  }
+  
+  .company-info p {
+    margin-bottom: 1rem;
+  }
+
+  /* Layout adjustments with Flexbox */
+.body-container {
+  display: flex;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding-left: 1rem; /* To ensure some space between sidebar and content */
+}
+
+/* Company section */
+.company-section {
+  max-width: 60%; /* Adjust as needed for the right side alignment */
+  margin-left: auto;
+  padding: 1rem;
+  background-color: #f2f2f2; /* Example background color */
+}
+
+/* Contact dropdown */
+.contact-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.contact-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+.contact-dropdown:hover .contact-dropdown-content {
+  display: block;
+}
+
+/* Example email list styling */
+.contact-dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.contact-dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+  }
+  .navbar {
+      display: flex;
+      justify-content: space-evenly;
+  }
+  .content-container {
+      margin-left: 0;
+  }
+}

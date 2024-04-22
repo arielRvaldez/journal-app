@@ -153,7 +153,7 @@ const JournalEntry = () => {
         ))}
       </div>
 
-      <h1>My Journal Entries</h1>
+      <h1>Journal Entries</h1>
       <div className="entry-form">
         <input
           type="text"
