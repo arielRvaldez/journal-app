@@ -139,7 +139,7 @@ const JournalEntry = () => {
   
 
   return (
-    <div className="container">
+    <div className="container" style={{ fontFamily: selectedFont}} >
       <h1>My Goals</h1>
       <div className='font-selector'>
         <label htmlFor='font-style'>Choose a font:</label>
@@ -177,7 +177,7 @@ const JournalEntry = () => {
           value={newEntry.title}
           onChange={(e) => setNewEntry({ ...newEntry, title: e.target.value })}
         />
-        <textarea
+        <textarea style={{ fontFamily: selectedFont, fontSize: '16px', width: '100%', height: '300px' }}
           placeholder="Content"
           value={newEntry.content}
           onChange={(e) => setNewEntry({ ...newEntry, content: e.target.value })}
@@ -195,7 +195,7 @@ const JournalEntry = () => {
                   value={updatedTitle || entry.title}
                   onChange={(e) => setUpdatedTitle(e.target.value)}
                 />
-                <textarea
+                <textarea style={{ fontFamily: selectedFont, fontSize: '16px', width: '100%', height: '300px' }}
                   placeholder="Content"
                   value={updatedContent || entry.content}
                   onChange={(e) => setUpdatedContent(e.target.value)}

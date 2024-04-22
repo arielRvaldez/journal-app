@@ -10,6 +10,26 @@ body {
   display: flex;
 }
 
+.navbar {
+  background-color: #333;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Link styles within navbar */
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+}
+
+.navbar a:hover {
+  color: #aaa;
+  text-decoration: underline;
+}
 /* App.css */
 body {
   font-family: 'Nunito', sans-serif;

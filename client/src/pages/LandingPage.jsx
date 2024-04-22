@@ -6,18 +6,6 @@ import './LandingPage.css';
 function LandingPage() {
   return (
     <div className="landing-container">
-      <nav className="top-nav">
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-        <Link to="/features">Features</Link>
-        <div className="contact-dropdown">
-          <button className="dropbtn">Contact</button>
-          <div className="dropdown-content">
-            <a href="mailto:contact@example.com">Email Us</a>
-            <a href="/contact">Contact Page</a>
-          </div>
-        </div>
-      </nav>
 
       <aside className="sidebar">
         <Link to="/go-pro">GO PRO</Link>
