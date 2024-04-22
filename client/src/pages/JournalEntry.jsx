@@ -10,6 +10,11 @@ const JournalEntry = () => {
   const [updateEntryId, setUpdateEntryId] = useState(null);
   const [updatedTitle, setUpdatedTitle] = useState('');
   const [updatedContent, setUpdatedContent] = useState('');
+  const [selectedFont, setSelectedFont] = useState('Arial');
+
+  const handleFontChange = (event) => {
+    setSelectedFont(event.target.value);
+  };
 
   // Function to fetch goals for the logged-in user
   const fetchGoals = async () => {
@@ -136,6 +141,16 @@ const JournalEntry = () => {
   return (
     <div className="container">
       <h1>My Goals</h1>
+      <div className='font-selector'>
+        <label htmlFor='font-style'>Choose a font:</label>
+        <select id='font-style' value={selectedFont} onChange={handleFontChange}>
+          <option value='Arial'>Arial</option>
+          <option value='Times New Roman'>Times New Roman</option>
+          <option value='Courier New'>Courier New</option>
+          <option value='Georgia'>Georgia</option>
+          <option value='Verdana'>Verdana</option>
+        </select>
+      </div>
       <div className="entry-form">
         <input
           type="text"
