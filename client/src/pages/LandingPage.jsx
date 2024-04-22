@@ -15,10 +15,12 @@ function LandingPage() {
       </aside>
 
       <main className="main-content">
+        <div className="text-container">
         <h1>Welcome to My ZenPages</h1>
         <p>If you already have an account, please <Link to="/login">login</Link>.</p>
         <p>If you are new here, you can <Link to="/signup">sign up</Link> for an account.</p>
         <Link to="/get-started" className="get-started-btn">Get Started</Link>
+        </div>
       </main>
     </div>
   );

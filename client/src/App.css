@@ -11,6 +11,11 @@ body, html {
 
 .App {
   text-align: center;
+  min-height: 100vh; /* Make sure it covers the full viewport height */
+  background-image: url(./assets/app.png); /* Use the relative path if not using import */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .navbar {

@@ -5,6 +5,7 @@ import Signup from './components/SignUp';
 import JournalEntry from './pages/JournalEntry';
 import Home from './pages/Home';
 import './App.css';
+import myImage from './assets/app.png';
 //import Navbar from './components/Navbar';
 //import Sidebar from './components/Sidebar';
 // import Layout from './components/Layout';

@@ -101,6 +101,17 @@ body {
 .main-content {
   flex-grow: 1;
   padding: 2rem;
+  position: relative;
+}
+
+.text-container {
+  position: absolute;
+  top: 30%; /* Adjust this value to position your text on the page of the book */
+  left: 40%; /* Center the text-container */
+  transform: translate(-50%, -50%); /* Adjust the position accurately */
+  width: 400px; /* Set a fixed width or as required */
+  padding: 20px;
+  /* other styles if needed */
 }
 
 .main-content h1 {
@@ -112,6 +123,7 @@ body {
 .main-content p {
   color: #666;
   margin: 1rem 0;
+  background-image: linear-gradient(to right, #ff5f6d, #ffc371);
 }
 
 .get-started-btn {
