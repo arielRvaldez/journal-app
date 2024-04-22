@@ -39,7 +39,7 @@ function SignUp() {
 
   return (
     <div className="form-container">
-      <h2>Sign Up</h2>
+      <h1>ZenPages</h1>
       <form onSubmit={handleSubmit}>
         <input type="text" name="username" placeholder="Username" value={formData.username} onChange={handleChange} />
         <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} />

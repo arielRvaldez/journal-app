@@ -37,7 +37,7 @@ function LandingPage() {
         <h1 className="title">Welcome to My Journal App</h1>
         <p className="tagline">If you already have an account, please <Link to="/login">login</Link>.</p>
         <p className="tagline">If you're new here, you can <Link to="/signup">sign up</Link> for an account.</p>
-        <button className="cta-button">Get Started</button>
+        <button className="cta-button">Get Started</button>``
       </div>
     </div>
   </div>

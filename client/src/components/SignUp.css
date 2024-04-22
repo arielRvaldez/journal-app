@@ -8,10 +8,12 @@
   }
   
   /* Style for the form header */
-  .form-container h2 {
+  .form-container h1 {
     text-align: center;
     margin-bottom: 20px;
     color: #5b5b5b;
+    background-image: linear-gradient(to right, #ff5f6d, #ffc371);
+    color: white;
   }
   
   /* Style for the form */

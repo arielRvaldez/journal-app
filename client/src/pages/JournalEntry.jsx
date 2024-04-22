@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './JournalEntry.css';
 
 const JournalEntry = () => {
   const [goals, setGoals] = useState([]);
