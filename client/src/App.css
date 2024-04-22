@@ -1,92 +1,180 @@
-.container {
-  max-width: 100%;
-  padding: 2rem;
+/* src/App.css */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
+
+body, html {
+  font-family: 'Quicksand', sans-serif;
+  background-color: #f7f7f7; /* Soft background color */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
   text-align: center;
+}
+
+.navbar {
+  background-color: #ff8a65; /* Warm color for the navbar */
+  padding: 1rem;
   display: flex;
-  flex-direction: column;
-  align-items: center; /* Center items horizontally */
+  justify-content: space-around; /* Evenly space the nav items */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.navbar a:hover {
+  color: #ffd180; /* Highlight color for nav links on hover */
 }
 
 .layout {
   display: flex;
   min-height: 100vh;
+  align-items: stretch; /* Make sidebar full height */
 }
 
 .sidebar {
   width: 250px; /* Adjust width as needed */
-  background: #2C3E50; /* Dark background for the sidebar */
-  color: rgb(175, 14, 14);
-  flex-shrink: 0;
-  height: 100vh;
-  overflow-y: auto;
+  background: #546e7a; /* Subtle blue for the sidebar */
+  color: white;
+  padding: 1rem;
+  height: 100vh; /* Full height */
 }
 
 .content {
   flex-grow: 1; /* Take up remaining space */
   padding: 20px;
+  overflow-y: auto; /* Add scroll on Y-axis if content overflows */
 }
 
 .entry-form {
-  margin-bottom: 20px;
-  width: 100%; /* Ensure the form takes full width */
+  background-color: #e1f5fe; /* Light blue background for form area */
+  border-radius: 10px;
+  padding: 2rem;
+  margin: 2rem auto; /* Center form in the content area */
+  width: 90%; /* Slightly less than full width for aesthetics */
+  max-width: 500px; /* Maximum width of the form */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .input-container {
-  display: flex;
-  justify-content: center;
+  margin-bottom: 1rem;
 }
 
 input[type="text"],
 textarea {
-  width: 100%;
-  margin-bottom: 10px;
+  border: 2px solid #4dd0e1; /* Border color */
+  border-radius: 4px;
   padding: 10px;
+  width: calc(100% - 24px); /* Account for padding and border */
 }
 
 button {
-  padding: 10px 20px;
-  background-color: #1a1a1a;
-  color: rgba(255, 255, 255, 0.87);
+  background-color: #4db6ac; /* A pleasant teal color */
+  color: white;
   border: none;
   border-radius: 5px; /* Rounded corners */
   cursor: pointer;
-  transition: background-color 0.25s;
-  margin-bottom: 10px;
+  padding: 12px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  transition: background-color 0.25s, transform 0.25s;
+}
+
+button:hover {
+  background-color: #00897b; /* A darker shade for the hover state */
+  transform: scale(1.05); /* Slightly increase the button size when hovered */
 }
 
 .entries {
   display: flex;
   flex-direction: column;
   align-items: center; /* Center items horizontally */
+  margin-top: 1rem;
 }
 
 .entry,
 .goal {
-  background-color: #f4f4f4;
-  padding: 10px;
-  margin-bottom: 10px;
-  width: 100%; /* Ensure entries take full width */
-}
-
-.button-container {
-  display: flex;
-  justify-content: center; /* Center buttons horizontally */
-  width: 100%; /* Ensure buttons take full width */
+  background-color: #ffffff; /* White color for entry/goal cards */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 1rem;
+  width: 90%; /* Similar to the form */
+  max-width: 600px; /* Maximum width for readability */
 }
 
 .update-button,
 .delete-button {
-  padding: 10px 20px;
-  background-color: #1a1a1a;
-  color: rgba(255, 255, 255, 0.87);
+  background-color: #f06292; /* Pink color for buttons */
+  color: white;
   border: none;
-  border-radius: 5px; /* Rounded corners */
+  border-radius: 5px;
   cursor: pointer;
+  padding: 10px 20px;
+  margin-right: 10px;
   transition: background-color 0.25s;
-  margin-right: 10px; /* Add margin between buttons */
 }
 
 .update-button:hover,
 .delete-button:hover {
-  background-color: #535bf2;
+  background-color: #c2185b; /* Darker pink on hover */
 }
+
+/* Additional styles for responsiveness and aesthetics */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%; /* Full width on smaller screens */
+    height: auto;
+    position: relative;
+  }
+
+  .content {
+    padding: 10px;
+    margin-left: 0; /* Remove margin when sidebar is not fixed */
+  }
+
+  .navbar {
+    flex-direction: column; /* Stack nav items on smaller screens */
+    padding: 0.5rem;
+  }
+
+  .navbar a {
+    margin: 5px 0; /* Add some space between stacked links */
+  }
+}
+
+/* Add transitions for input focus states */
+input[type="text"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: #26c6da; /* Highlight color when focused */
+}
+
+/* Style the navbar to be more inviting */
+.navbar {
+  background-color: #fff; /* Light background for navbar */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar a {
+  color: #4db6ac; /* Teal color for links */
+  transition: color 0.3s;
+}
+
+.navbar a:hover {
+  color: #00897b; /* Darker teal on hover */
+}
+
+/* Add a playful font for headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Quicksand', sans-serif;
+  color: #333; /* Dark color for better contrast */
+}
+
