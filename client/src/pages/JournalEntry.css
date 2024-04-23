@@ -170,13 +170,42 @@ h1 {
   /* Responsive design adjustments for smaller devices */
   @media (max-width: 768px) {
     .container {
-      padding: 1rem;
+      max-width: 100%; /* Adjust container width to full width */
+      border-radius: 0; /* Remove border radius for full-width container */
+      box-shadow: none; /* Remove box shadow for full-width container */
+      padding: 1rem; /* Adjust padding for better spacing on smaller screens */
     }
   
     .entry-form,
     .goals,
     .entries {
-      width: 100%;
+      width: 100%; /* Set width to full width on smaller screens */
+    }
+  
+    /* Adjust individual goal and entry card styles for better stacking */
+    .goal,
+    .entry {
+      padding: 1rem; /* Adjust padding for better spacing on smaller screens */
+    }
+  
+    /* Adjust button positions for usability on smaller screens */
+    .goal button,
+    .entry button {
+      align-self: flex-start; /* Align buttons to the start on smaller screens */
+      margin-top: 1rem; /* Add margin-top for better spacing between buttons */
+    }
+  
+    /* Adjust styling for titles in entries on smaller screens */
+    .entry h2 {
+      font-size: 1.25rem; /* Reduce font size for better readability on smaller screens */
+      margin-bottom: 0.25rem; /* Adjust margin for better spacing */
+    }
+  
+    /* Adjust content text styling for better readability on smaller screens */
+    .entry p,
+    .goal p {
+      font-size: 0.875rem; /* Reduce font size for better readability on smaller screens */
+      line-height: 1.4; /* Adjust line height for better readability */
     }
   }
   

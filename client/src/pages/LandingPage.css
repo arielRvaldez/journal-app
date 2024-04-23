@@ -140,12 +140,45 @@ body {
   background: #4cae4c;
 }
 
+/* App.css */
+/* Existing styles */
+
 @media (max-width: 768px) {
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
+  /* Adjustments for smaller screens */
+
+  .landing-container {
+    flex-direction: column; /* Stack items vertically */
   }
+
+  .top-nav {
+    flex-direction: column;
+    align-items: center; /* Center items vertically */
+  }
+
+  .top-nav a {
+    margin: 0.5rem 0; /* Add space between navigation links */
+  }
+
+  .sidebar {
+    width: 100%; /* Take full width on smaller screens */
+    min-height: auto; /* No minimum height */
+    position: static; /* Remove fixed position */
+  }
+
+  .main-content {
+    padding: 1rem; /* Add padding for better spacing */
+  }
+
+  .text-container {
+    position: relative; /* Remove absolute positioning */
+    top: auto;
+    left: auto;
+    transform: none;
+    width: auto; /* Allow width to adjust */
+    margin: 0 auto; /* Center horizontally */
+  }
+}
+
   
   .top-nav {
     flex-direction: column;

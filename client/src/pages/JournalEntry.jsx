@@ -70,12 +70,7 @@ const JournalEntry = () => {
         return;
       }
 
-      const response = await axios.post('http://localhost:5001/api/entries', {
-        title: newEntry.title,
-        content: newEntry.content
-      });
-
-      setEntries([...entries, response.data.entry]);
+      setEntries([...entries, newEntry]);
       setNewEntry({ title: '', content: '' });
       alert('Journal entry added successfully!');
     } catch (error) {
@@ -97,7 +92,6 @@ const JournalEntry = () => {
 
   const deleteEntry = async (id) => {
     try {
-      await axios.delete(`http://localhost:5001/api/entries/${id}`);
       setEntries(entries.filter(entry => entry._id !== id));
       alert('Journal entry deleted successfully!');
     } catch (error) {
